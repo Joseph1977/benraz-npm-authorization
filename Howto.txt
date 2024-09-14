@@ -1,0 +1,98 @@
+You have two options for deploying Angular packages: npm.org and GitHub Packages. Here’s how to deploy to both:
+
+Deploy to npm.org
+Login to npm:
+
+First, ensure you are logged into npm. If you don’t have an npm account, create one here.
+bash
+    npm login
+Enter your credentials (username, password, and email) when prompted.
+
+Configure your package.json:
+
+Update the package.json file of your Angular package with the following fields:
+json
+{
+  "name": "@your-username/package-name",
+  "version": "1.0.0",
+  "description": "Your package description",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/repository-name.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}
+Publish your package to npm:
+
+Once your package.json is ready and you're logged into npm, run the following command to publish:
+bash
+npm publish --access public
+(Use --access public to publish a public package. For private packages, omit this flag.)
+
+Verify your package:
+
+After publishing, go to npm.org to confirm that your package appears in your profile.
+
+
+If you generated an npm access token, you can use that instead of logging in with your username and password. Here's how you can configure npm to use your access token:
+
+Step 1: Add the Access Token to npm
+If you haven’t already configured your npm to use the token, follow these steps:
+
+Open your terminal and run the following command to add your token to the npm config:
+
+bash
+npm set //registry.npmjs.org/:_authToken=YOUR_ACCESS_TOKEN
+Replace YOUR_ACCESS_TOKEN with the actual token you generated in your npm account.
+
+Verify that the token has been added by running:
+
+bash
+npm config get //registry.npmjs.org/:_authToken
+Step 2: Publish the Package
+Once the access token is configured, you should be able to publish your package without logging in:
+
+bash
+
+npm publish --access public
+
+
+
+------------------------
+Deploy to GitHub Packages
+Authenticate with GitHub Packages:
+
+You’ll need a GitHub token with the read:packages, write:packages, and repo scopes. Create a personal access token.
+Configure npm to use GitHub Packages:
+
+Set up authentication by running the following command, replacing <TOKEN> with your GitHub personal access token:
+bash
+npm set //npm.pkg.github.com/:_authToken=<TOKEN>
+Update your package.json:
+
+Add your GitHub Package registry and adjust the name field to include your GitHub username:
+json
+{
+  "name": "@your-github-username/package-name",
+  "version": "1.0.0",
+  "description": "Your package description",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/repository-name.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
+}
+Publish to GitHub Packages:
+
+Once your package.json is ready, publish the package using the following command:
+bash
+npm publish
+Verify the package:
+
+Go to your repository in GitHub and navigate to the "Packages" section to confirm your package is published.

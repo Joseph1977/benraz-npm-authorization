@@ -1,2 +1,6 @@
-#benraz-npm-authorization
-Manage the authorization part
+# benraz-npm-authorization-
+Common frontend package
+Ng 16
+
+npm install
+npm run build

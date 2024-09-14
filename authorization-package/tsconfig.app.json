@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": [],
+    "paths": {
+      "@josephbenraz/npm-common": [
+        "projects/npm-common/src/public-api",
+        "dist/npm-common/npm-common",
+        "dist/npm-common"
+      ]
+    }
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ]
+}

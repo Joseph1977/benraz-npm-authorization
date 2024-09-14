@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "refreshVSToken": "vsts-npm-auth -config .npmrc"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^16.2.12",
     "@angular/cdk": "^16.2.12",

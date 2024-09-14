@@ -1,0 +1,27 @@
+{
+  "name": "@josephbenraz/npm-authorization",
+  "version": "1.0.0",
+  "description": "Common authorization stuff",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joseph1977/benraz-npm-authorization.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "refreshVSToken": "vsts-npm-auth -config .npmrc",
+    "build": "ng build npm-authorization"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "peerDependencies": {
+    "@angular/common": "^16.2.12",
+    "@angular/core": "^16.2.12",
+    "@angular/material": "^16.0.0",
+    "@angular/forms": "16.2.12",
+    "@angular/platform-browser": "16.2.12",
+    "jwt-decode": "^4.0.0"
+  }
+}

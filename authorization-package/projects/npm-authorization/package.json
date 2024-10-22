@@ -1,6 +1,6 @@
 {
   "name": "@josephbenraz/npm-authorization",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Common authorization stuff",
   "repository": {
     "type": "git",
@@ -17,11 +17,11 @@
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
-    "@angular/common": "^16.2.12",
-    "@angular/core": "^16.2.12",
-    "@angular/material": "^16.0.0",
-    "@angular/forms": "16.2.12",
-    "@angular/platform-browser": "16.2.12",
+    "@angular/common": "^17.3.12",
+    "@angular/core": "^17.3.12",
+    "@angular/material": "^17.3.10",
+    "@angular/forms": "^17.3.12",
+    "@angular/platform-browser": "^17.3.12",
     "jwt-decode": "^4.0.0"
   }
 }

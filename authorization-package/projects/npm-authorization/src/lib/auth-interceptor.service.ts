@@ -17,9 +17,12 @@ export class AuthInterceptorService implements HttpInterceptor {
   }
 
   private handleAuthError(err: HttpErrorResponse): Observable<any> {
-    if (err.status === 401) {
+    if (this.config.redirectWhen401 == true && err.status === 401) {
       this.router.navigate([this.config.loginUrl]);
       return of(err.message);
+    }
+    else if(this.config.redirectWhen401 == false && err.status === 401) {
+      throw err.statusText;
     }
 
     if (err.status === 403) {
@@ -27,9 +30,13 @@ export class AuthInterceptorService implements HttpInterceptor {
     }
 
     throw err;
-  }
+  } 
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (this.authService.isTokenExpiredOrEmpty()) { 
+      this.router.navigate([this.config.loginUrl]);
+    }
+
     const authReq = req.clone({
       setHeaders: {
         Authorization: `Bearer ${this.authService.getToken()}`

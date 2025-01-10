@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { InternalUrlsService } from '@josephbenraz/npm-common';
 import { AuthorizationConfig, LoginMode } from './authorization.model';
 import { CookieService } from 'ngx-cookie-service';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable()
 export class AuthService {
@@ -45,6 +46,22 @@ export class AuthService {
 
   }
 
+  isTokenExpiredOrEmpty() : boolean {
+    let token = this.getToken();
+    if (token) { 
+      let decodedToken = this.getDecodedAccessToken(token);
+      //Check expiry
+      const expirationTime = decodedToken.exp;
+      const currentTime = Math.floor(Date.now() / 1000);
+      if (expirationTime < currentTime) {
+        return true;
+      } 
+    } else {
+      return true;
+    }
+    return false;
+  }
+
   private getQueryString(mode?: LoginMode, returnUrl?: string): string {
     let params = new HttpParams();
     if (this.config.applicationId !== undefined) {
@@ -66,5 +83,13 @@ export class AuthService {
     }
 
     return params.toString();
+  }
+
+  private getDecodedAccessToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (Error) {
+      return null;
+    }
   }
 }

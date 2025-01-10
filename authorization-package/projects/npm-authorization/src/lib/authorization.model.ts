@@ -61,6 +61,7 @@ export class AuthorizationConfig {
   isCookies?: boolean;
   isLocal?: boolean;
   disableAuthorization?: boolean;
+  redirectWhen401?: boolean = true;
 }
 
 export enum LoginMode {

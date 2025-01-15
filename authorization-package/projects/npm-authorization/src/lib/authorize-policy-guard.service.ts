@@ -7,7 +7,7 @@ import { UserService } from './user.service';
 import { AuthService } from './auth.service';
 
 @Injectable()
-export class AuthorizePolicyGuardService  {
+export class AuthorizePolicyGuardService {
   constructor(
     private router: Router,
     private notificationService: NotificationService,
@@ -20,7 +20,7 @@ export class AuthorizePolicyGuardService  {
     if (this.config.disableAuthorization) {
       return true;
     }
-    
+
     let queryParams = null;
     if (state?.url) {
       queryParams = {
@@ -28,19 +28,20 @@ export class AuthorizePolicyGuardService  {
         preserveFragment: true
       }
     }
-    
+
     if (!this.userService.getUser().isAuthenticated) {
       this.router.navigate([this.config.loginUrl], queryParams as any);
       return false;
     }
 
-    if (!this.userService.isPolicySatisfied(next.data['policy']) ) {
+    if (!this.userService.isPolicySatisfied(next.data['policy'])) {
       this.notificationService.error('Access denied');
       this.router.navigate([this.config.loginUrl], queryParams as any);
       return false;
     }
 
-    if(this.authService.isTokenExpiredOrEmpty()) {
+    if (this.authService.isTokenExpiredOrEmpty()) {
+      this.router.navigate([this.config.loginUrl], queryParams as any);
       return false;
     }
 

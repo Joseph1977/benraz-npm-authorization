@@ -1,6 +1,6 @@
 {
   "name": "@josephbenraz/npm-authorization",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Common authorization stuff",
   "repository": {
     "type": "git",

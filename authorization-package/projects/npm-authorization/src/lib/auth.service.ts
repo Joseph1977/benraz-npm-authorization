@@ -47,6 +47,9 @@ export class AuthService {
   }
 
   isTokenExpiredOrEmpty() : boolean {
+    if (this.config.disableAuthorization)
+      return false;
+
     let token = this.getToken();
     if (token) { 
       let decodedToken = this.getDecodedAccessToken(token);

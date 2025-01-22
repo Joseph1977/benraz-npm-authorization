@@ -35,20 +35,25 @@ export class UserService {
     return false;
   }
 
-  public isPolicySatisfied(policy: string | undefined): boolean {
+  public isPolicySatisfied(policy: string | string[] | undefined): boolean {
     if (this.config.disableAuthorization) {
       return true;
     }
 
-    if (!policy) {
-      return false;
+    if(!this.checkDataPolicy(policy)){
+      return true;
     }
 
-    const policyRule = this.policies.find(x => x.policy === policy);
+    let policyRule : PolicyRegistration | undefined;
+    if (typeof policy === 'string') {
+      policyRule = this.policies.find(x => x.policy === policy);
+    } else if (Array.isArray(policy)) {
+      policyRule = this.policies.find(x => policy.some(y => y === x.policy));
+    }
     if (!policyRule) {
       return false;
     }
-
+    
     const user = this.createCurrentTokenUser();
     if (!user) {
       return false;
@@ -138,4 +143,18 @@ export class UserService {
 
     return new Date(unixTime * 1000);
   }
+
+  private checkDataPolicy(policy: string | string[] | undefined | null): boolean {
+    if (!policy) return false;
+  
+    if (typeof policy === 'string') {
+      return policy !== '' && policy !== 'not-implemented';
+    }
+  
+    if (Array.isArray(policy)) {
+      return policy.length > 0 && !policy.includes('not-implemented');
+    }
+  
+    return true;
+  }  
 }

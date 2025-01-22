@@ -30,13 +30,15 @@ export class AuthorizePolicyGuardService {
     }
 
     if (!this.userService.getUser().isAuthenticated) {
-      this.router.navigate([this.config.loginUrl], queryParams as any);
+      if(this.config.redirectWhen401 == true)
+        this.router.navigate([this.config.loginUrl], queryParams as any);
       return false;
     }
 
     if (!this.userService.isPolicySatisfied(next.data['policy'])) {
       this.notificationService.error('Access denied');
-      this.router.navigate([this.config.loginUrl], queryParams as any);
+      if(this.config.redirectWhen401 == true)
+        this.router.navigate([this.config.loginUrl], queryParams as any);
       return false;
     }
 

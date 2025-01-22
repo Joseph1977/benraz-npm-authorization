@@ -1,1 +1,1 @@
-npm run publish:npm-common
+npm run publish:npm-authorization

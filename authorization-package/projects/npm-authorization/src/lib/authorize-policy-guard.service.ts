@@ -30,8 +30,7 @@ export class AuthorizePolicyGuardService {
     }
 
     if (!this.userService.getUser().isAuthenticated) {
-      if(this.config.redirectWhen401 == true)
-        this.router.navigate([this.config.loginUrl], queryParams as any);
+      this.router.navigate([this.config.loginUrl], queryParams as any);
       return false;
     }
 

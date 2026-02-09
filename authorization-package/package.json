@@ -11,6 +11,9 @@
     "lint": "ng lint",
     "refreshVSToken": "vsts-npm-auth -config .npmrc"
   },
+  "overrides": {
+    "qs": ">=6.14.1"
+  },
   "private": false,
   "dependencies": {
     "@angular/animations": "^18.2.8",
